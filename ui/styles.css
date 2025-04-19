@@ -1,0 +1,326 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+
+body {
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#app {
+    display: none;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+.fps-booster-ui {
+    width: 500px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: relative;
+    border: 1px solid rgba(0, 120, 255, 0.5);
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(to right, #0078ff, #00c3ff);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.main-toggle {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.main-toggle span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.settings-section {
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.setting {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.setting-header {
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 120, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.setting-header h3 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.setting-content {
+    padding: 15px;
+}
+
+.slider-container {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.slider-container label {
+    flex: 1;
+    font-size: 14px;
+}
+
+.slider-container input[type="range"] {
+    flex: 2;
+    height: 5px;
+    background: #4c4c4c;
+    outline: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #0078ff;
+    cursor: pointer;
+}
+
+.slider-container input[type="range"]:hover {
+    background: #5f5f5f;
+}
+
+.slider-container .value {
+    width: 45px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.select-container {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.select-container label {
+    flex: 1;
+    font-size: 14px;
+}
+
+.select-container select {
+    flex: 2;
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 4px;
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.select-container select:focus {
+    border-color: #0078ff;
+}
+
+.checkbox-container {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkbox-container label {
+    font-size: 14px;
+}
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle.small {
+    width: 44px;
+    height: 22px;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4c4c4c;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.toggle.small .slider:before {
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+}
+
+input:checked + .slider {
+    background-color: #0078ff;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #0078ff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.toggle.small input:checked + .slider:before {
+    transform: translateX(21px);
+}
+
+.toggle-label {
+    position: absolute;
+    right: -40px;
+    top: 5px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.footer {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.close-btn-bottom {
+    background: linear-gradient(to right, #0078ff, #00c3ff);
+    border: none;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.close-btn-bottom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn-bottom:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.fps-display {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #0f0;
+}
+
+/* Scrollbar styling */
+.settings-section::-webkit-scrollbar {
+    width: 8px;
+}
+
+.settings-section::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.settings-section::-webkit-scrollbar-thumb {
+    background: rgba(0, 120, 255, 0.5);
+    border-radius: 4px;
+}
+
+.settings-section::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 120, 255, 0.7);
+}
